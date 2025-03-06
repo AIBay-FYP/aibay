@@ -6,34 +6,55 @@ class AppTheme {
     fontFamily: 'Sora',
     brightness: Brightness.light,
     scaffoldBackgroundColor: const Color(0xFFFFFFFF), // Light Mode Background (White)
-    primaryColor: const Color(0xFF364C59), // Button or other highlight-related color
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Color(0xFF0C0C0C)), // Min Background (Used for Text in Light Mode)
-      bodyMedium: TextStyle(color: Color(0xFF696363)), // Light Text Color
-    ),
     colorScheme: const ColorScheme.light(
       surface: Color(0xFFFFFFFF), // Background Color
-      primary: Color(0xFF364C59), // Button Color (Same as primaryColor)
-      secondary: Color(0xFFD9D9D9), // Light Mode Highlighter (New)
-      onSecondary: Color(0xFFE8E8E8), // Light Mode TextField Color (New)
+      primary: Color(0xFF364C59), // Button & Primary Color
+      secondary: Color(0xFFD9D9D9), // Light Mode Highlighter
+      onSecondary: Color(0xFFE8E8E8), // Light Mode TextField Color
+      onSurface: Color(0xFF0C0C0C), // Default Text Color
     ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Color(0xFF0C0C0C)), // Primary text
+      bodyMedium: TextStyle(color: Color(0xFF696363)), // Light Text Color
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF364C59), // Use primary color
+        foregroundColor: Colors.white, // Text color
+      ),
+    ),
+    applyElevationOverlayColor: false,
   );
 
   // Dark Theme
   static final ThemeData darkTheme = ThemeData(
     fontFamily: 'Sora',
     brightness: Brightness.dark,
-    scaffoldBackgroundColor: const Color(0xFF0C0C0C), // Min Background (Dark Mode)
-    primaryColor: const Color(0xFF364C59), // Button or other highlight-related color
+    scaffoldBackgroundColor: const Color(0xFF0C0C0C), // Dark Background
+    colorScheme: const ColorScheme.dark(
+      surface: Color(0xFF0C0C0C), // Background Color
+      primary: Color(0xFF364C59), // Button & Primary Color
+      secondary: Color(0xFF3B3B3B), // Highlighter
+      onSecondary: Color(0xFF262626), // Dark Mode TextField Color
+      onSurface: Color(0xFFFFFFFF), // Default Text Color (White)
+    ),
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Color(0xFFFFFFFF)), // Text Color (White)
+      bodyLarge: TextStyle(color: Color(0xFFFFFFFF)), // Primary text
       bodyMedium: TextStyle(color: Color(0xFF696363)), // Light Text Color
     ),
-    colorScheme: const ColorScheme.dark(
-      surface: Color(0xFF1F1F1F), // Background Color
-      primary: Color(0xFF364C59), // Button Color (Same as primaryColor)
-      secondary: Color(0xFF3B3B3B), // Highlighter
-      onSecondary: Color(0xFF262626), // Dark Mode TextField Color (New)
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF364C59), // Use primary color
+        foregroundColor: Colors.white, // Text color
+      ),
     ),
+    applyElevationOverlayColor: false,
   );
+
+
+  static const Color primaryTextColorLight = Color(0xFF0C0C0C);
+  static const Color secondaryTextColorLight = Color(0xFF696363);
+  
+  static const Color primaryTextColorDark = Color(0xFFFFFFFF);
+  static const Color secondaryTextColorDark = Color(0xFF696363);
 }

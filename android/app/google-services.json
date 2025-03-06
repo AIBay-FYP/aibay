@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "974037748639",
+    "project_id": "aibay-716ff",
+    "storage_bucket": "aibay-716ff.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974037748639:android:4ac22492f9bb1ded8ecbaa",
+        "android_client_info": {
+          "package_name": "com.example.aibay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGlgzK0N9wn0-Ulp1CRhlK_RwYUYu2Otg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
