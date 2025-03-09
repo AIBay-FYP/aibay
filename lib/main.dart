@@ -1,3 +1,4 @@
+import 'package:aibay/screens/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +6,7 @@ import 'firebase_options.dart';
 import 'package:aibay/providers/theme_provider.dart';
 import 'package:aibay/screens/login.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 
 void main() async {
@@ -27,5 +29,11 @@ class MyApp extends ConsumerWidget {
       theme: theme,
       home: LoginScreen(),
     );
+
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   theme: theme,
+    //   home: ChatScreen(),
+    // );
   }
 }

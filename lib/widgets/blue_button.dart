@@ -11,7 +11,7 @@ class CustomBlueButton extends StatelessWidget {
   final double height;
 
   const CustomBlueButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed, // Default text color is white
     this.padding = const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0), // Default padding
@@ -19,7 +19,7 @@ class CustomBlueButton extends StatelessWidget {
     this.fontSize = 16.0, // Default font size
     this.elevation = 4.0, // Default elevation for shadow
     this.height = 50.0, // Default button height
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
