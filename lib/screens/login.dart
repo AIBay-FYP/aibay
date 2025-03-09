@@ -1,4 +1,7 @@
+import 'package:aibay/providers/auth.dart';
 import 'package:aibay/providers/login.dart';
+import 'package:aibay/providers/phoneNumber.dart';
+import 'package:aibay/screens/otp.dart';
 import 'package:aibay/theme/app_colors.dart';
 import 'package:aibay/widgets/blue_button.dart';
 import 'package:aibay/widgets/phone_field.dart';
@@ -15,6 +18,7 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loginState = ref.watch(loginProvider);
+    final phoneNumber = ref.watch(phoneNumberProvider);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -90,7 +94,23 @@ class LoginScreen extends ConsumerWidget {
                   SizedBox(
                     width: double.infinity,
                     height: buttonHeight,
-                    child: CustomBlueButton(text: "Next", onPressed: () {}),
+                    child: CustomBlueButton(
+                      text: "Next", 
+                      onPressed: () async {
+                        final authController = ref.read(authControllerProvider.notifier);
+
+                        bool isVerified = await authController.verifyPhoneNumber(phoneNumber);
+
+                        if (isVerified) {
+                            Navigator.push(context,MaterialPageRoute(
+                              builder: (context) => OTPScreen()));
+                          } else {
+                            // Handle failure (e.g., show an error message)
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Verification failed!")),
+                            );
+                          }
+                      }),
                   ),
                   
                   SizedBox(height: screenHeight * 0.03),
@@ -141,7 +161,7 @@ class LoginScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            'lib/assets/logos/google.svg',
+                            '/assets/logos/google.svg',
                             height: fontSize, // Adjust icon size
                           ),
                           SizedBox(width: screenWidth * 0.02),
