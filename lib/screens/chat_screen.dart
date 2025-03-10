@@ -1,51 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import '../providers/chat_provider.dart';
-// import '../widgets/chat_tile.dart';
-// import '../widgets/search_bar.dart';
-
-// class ChatScreen extends ConsumerWidget {
-//   const ChatScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final chats = ref.watch(chatProvider);
-
-//     return Scaffold(
-//       backgroundColor: Colors.grey[900],
-//       appBar: AppBar(
-//         title: const Text("Chats"),
-//         backgroundColor: Colors.black,
-//         elevation: 0,
-//       ),
-//       body: Column(
-//         children: [
-//           const SearchBarWidget(),
-//           Expanded(
-//             child: ListView.builder(
-//               itemCount: chats.length,
-//               itemBuilder: (context, index) {
-//                 return ChatTile(chat: chats[index], isSelected: index == 0);
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//       bottomNavigationBar: BottomNavigationBar(
-//         backgroundColor: Colors.black,
-//         selectedItemColor: Colors.white,
-//         unselectedItemColor: Colors.grey,
-//         items: const [
-//           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-//           BottomNavigationBarItem(icon: Icon(Icons.chat_bubble), label: ""),
-//           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: ""),
-//           BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/chat_provider.dart';
@@ -113,9 +65,10 @@ class ChatScreen extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ListView.builder(
+                
                 itemCount: chats.length,
                 itemBuilder: (context, index) {
-                  return ChatTile(chat: chats[index], isSelected: index == 0);
+                  return ChatTile(chat: chats[index]);
                 },
               ),
             ),

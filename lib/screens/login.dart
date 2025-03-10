@@ -1,4 +1,5 @@
 import 'package:aibay/providers/auth.dart';
+import 'package:aibay/providers/google_auth.dart';
 import 'package:aibay/providers/login.dart';
 import 'package:aibay/providers/phoneNumber.dart';
 import 'package:aibay/screens/otp.dart';
@@ -149,33 +150,43 @@ class LoginScreen extends ConsumerWidget {
                     width: double.infinity,
                     height: buttonHeight,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: colorScheme.surface,
-                        backgroundColor: colorScheme.onSurface,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(borderRadius),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            '/assets/logos/google.svg',
-                            height: fontSize, // Adjust icon size
-                          ),
-                          SizedBox(width: screenWidth * 0.02),
-                          Text(
-                            'Sign in with Google',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: fontSize * 0.75, // Adjust text size
+                          onPressed: () async {
+                             final authController = ref.read(googleAuthControllerProvider.notifier);
+                             bool success = await authController.signInWithGoogle();
+
+                            if (success) {
+                              print("🎉 Google Sign-In Successful!");
+                              // TODO: Navigate to the home screen or update UI
+                            } else {
+                              print("❌ Google Sign-In Failed");
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: colorScheme.surface,
+                            backgroundColor: colorScheme.onSurface,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(borderRadius),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/logos/google.svg',  // ✅ Ensure correct asset path
+                                height: fontSize, // Adjust icon size
+                              ),
+                              SizedBox(width: screenWidth * 0.02),
+                              Text(
+                                'Sign in with Google',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: fontSize * 0.75, // Adjust text size
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                ),
                 ],
               ),
             );

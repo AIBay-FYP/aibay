@@ -11,8 +11,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 
 void main() async {
-  // await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const ProviderScope(child: MyApp()));
@@ -25,10 +25,17 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeProvider);
 
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   theme: theme,
+    //   home: OTPScreen(),
+    // );
+
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: OTPScreen(),
+      home: LoginScreen(),
     );
 
     // return MaterialApp(
