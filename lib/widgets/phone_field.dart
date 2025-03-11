@@ -1,4 +1,5 @@
 import 'package:aibay/providers/country_code.dart';
+import 'package:aibay/providers/phoneNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -9,6 +10,7 @@ class PhoneNumberField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String countryCode = ref.watch(countryCodeProvider);
+    final phoneNumber = ref.watch(phoneNumberProvider);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -19,7 +21,7 @@ class PhoneNumberField extends ConsumerWidget {
       padding: EdgeInsets.only(top: screenHeight*0.01),
       child: InternationalPhoneNumberInput(
           onInputChanged: (PhoneNumber number) {
-            print(countryCode); // Just printing the number
+            ref.read(phoneNumberProvider.notifier).state = number.phoneNumber ?? "";
           },
           selectorConfig: SelectorConfig(
             selectorType: PhoneInputSelectorType.DIALOG,
