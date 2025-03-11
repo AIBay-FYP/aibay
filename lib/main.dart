@@ -1,3 +1,5 @@
+import 'package:aibay/screens/category.dart';
+import 'package:aibay/screens/notifications_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,7 +27,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: LoginScreen(),
+      home: CategoryScreen(),
     );
   }
 }
