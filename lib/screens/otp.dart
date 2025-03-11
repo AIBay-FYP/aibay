@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-// Ensure you're using go_router for navigation
 
 class OTPScreen extends ConsumerWidget {
   const OTPScreen({super.key});
@@ -36,6 +35,7 @@ class OTPScreen extends ConsumerWidget {
             double screenWidth = constraints.maxWidth;
             double screenHeight = constraints.maxHeight;
 
+            // Adjust padding and sizes based on screen dimensions
             double paddingHorizontal = screenWidth * 0.05;
             double paddingVertical = screenHeight * 0.08;
             double buttonHeight = screenHeight * 0.07;
@@ -46,99 +46,99 @@ class OTPScreen extends ConsumerWidget {
                 horizontal: paddingHorizontal,
                 vertical: paddingVertical,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Verification",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Sora',
-                      fontSize: fontSize,
-                      color: Theme.of(context).brightness == Brightness.light
-                          ? AppTheme.primaryTextColorLight
-                          : AppTheme.primaryTextColorDark,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Verification",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Sora',
+                        fontSize: fontSize,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? AppTheme.primaryTextColorLight
+                            : AppTheme.primaryTextColorDark,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: screenHeight * 0.01),
-                  Text(
-                    "Login to your account and discover high-quality demand-based products",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Sora',
-                      fontSize: fontSize * 0.65,
-                      color: AppTheme.secondaryTextColorDark,
+                    SizedBox(height: screenHeight * 0.01),
+                    Text(
+                      "Login to your account and discover high-quality demand-based products",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Sora',
+                        fontSize: fontSize * 0.65,
+                        color: AppTheme.secondaryTextColorDark,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Text(
-                    "OTP",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Sora',
-                      fontSize: fontSize * 0.75,
-                      color: Theme.of(context).brightness == Brightness.light
-                          ? AppTheme.primaryTextColorLight
-                          : AppTheme.primaryTextColorDark,
+                    SizedBox(height: screenHeight * 0.02),
+                    Text(
+                      "OTP",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Sora',
+                        fontSize: fontSize * 0.75,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? AppTheme.primaryTextColorLight
+                            : AppTheme.primaryTextColorDark,
+                      ),
                     ),
-                  ),
-                  
-                  SizedBox(height: screenHeight * 0.02),
-                  OtpTextField(
-                    showCursor: false,
-                    borderWidth: 2,
-                    numberOfFields: 6,
-                    fieldWidth: screenWidth * 0.13,
-                    filled: true,
-                    fillColor: colorScheme.onSecondary,
-                    showFieldAsBox: true,
-                    borderColor: colorScheme.onSecondary,
-                    enabledBorderColor: colorScheme.onSecondary,
-                    focusedBorderColor: colorScheme.primary,
                     
-                    onSubmit: (String verificationCode) {
-                      otpController.text = verificationCode; // Store OTP
-                    },
-                  ),
-                  
-                  SizedBox(height: screenHeight * 0.04),
-                  
-                  SizedBox(
-                    width: double.infinity,
-                    height: buttonHeight,
-                    child: CustomBlueButton(
-                      text: "Verify",
-                      onPressed: () async {
-                        final authController =
-                            ref.read(authControllerProvider.notifier);
-                        final otp = otpController.text.trim();
-
-                        if (otp.isEmpty || otp.length < 5) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("Please enter a valid OTP")),
-                          );
-                          return;
-                        }
-
-                        bool token = await authController.signInWithOtp(otp);
-
-                        if (token) {
-                          
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                            HomeScreen()
-                          )); // Navigate to home screen on success
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("OTP Verification failed")),
-                          );
-                        }
+                    SizedBox(height: screenHeight * 0.02),
+                    OtpTextField(
+                      showCursor: false,
+                      borderWidth: 2,
+                      numberOfFields: 6,
+                      fieldWidth: screenWidth * 0.12, // Make field width responsive
+                      filled: true,
+                      fillColor: colorScheme.onSecondary,
+                      showFieldAsBox: true,
+                      borderColor: colorScheme.onSecondary,
+                      enabledBorderColor: colorScheme.onSecondary,
+                      focusedBorderColor: colorScheme.primary,
+                      onSubmit: (String verificationCode) {
+                        otpController.text = verificationCode; // Store OTP
                       },
                     ),
-                  ),
-                ],
+                    
+                    SizedBox(height: screenHeight * 0.04),
+                    
+                    SizedBox(
+                      width: double.infinity,
+                      height: buttonHeight,
+                      child: CustomBlueButton(
+                        text: "Verify",
+                        onPressed: () async {
+                          final authController =
+                              ref.read(authControllerProvider.notifier);
+                          final otp = otpController.text.trim();
+
+                          if (otp.isEmpty || otp.length < 5) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Please enter a valid OTP")),
+                            );
+                            return;
+                          }
+
+                          bool token = await authController.signInWithOtp(otp);
+
+                          if (token) {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                              HomeScreen()
+                            )); // Navigate to home screen on success
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("OTP Verification failed")),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },
