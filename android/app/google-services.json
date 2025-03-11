@@ -12,7 +12,20 @@
           "package_name": "com.example.aibay"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "974037748639-50njq36vaen660g960v9mvfmdr4hv9vu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aibay",
+            "certificate_hash": "90ecc049142fd005fd55167ba8f722a70e632f4c"
+          }
+        },
+        {
+          "client_id": "974037748639-ir2717j2ful1ts56ssfhv3iph89og0bo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDGlgzK0N9wn0-Ulp1CRhlK_RwYUYu2Otg"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974037748639-ir2717j2ful1ts56ssfhv3iph89og0bo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974037748639-a86ptmeblhedbil3dt6e559u3bl1kj3l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aibay"
+              }
+            }
+          ]
         }
       }
     }
