@@ -45,6 +45,7 @@ dependencies:
   firebase_auth: 
   flutter_otp_text_field: 
   google_sign_in: 
+  google_sign_in_web:
 
 dev_dependencies:
   flutter_test:

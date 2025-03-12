@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "974037748639-j7ld9dp5in9pjfvklu8a50le996g7j8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aibay",
+            "certificate_hash": "848402b513f7cc96e1d394c5eac2208428ff634b"
+          }
+        },
+        {
           "client_id": "974037748639-ir2717j2ful1ts56ssfhv3iph89og0bo.apps.googleusercontent.com",
           "client_type": 3
         }
