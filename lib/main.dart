@@ -8,8 +8,6 @@ import 'package:aibay/providers/theme_provider.dart';
 import 'package:aibay/screens/login.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-
-
 void main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,30 +16,40 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    ref.read(themeProvider.notifier).setSystemTheme();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = ref.watch(themeProvider);
 
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   theme: theme,
-    //   home: OTPScreen(),
-    // );
-
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: LoginScreen(),
     );
-
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   theme: theme,
-    //   home: ChatScreen(),
-    // );
   }
 }

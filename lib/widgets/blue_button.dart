@@ -23,16 +23,13 @@ class CustomBlueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Theme.of(context).brightness == Brightness.light
-                        ? AppTheme.primaryTextColorLight
-                        : AppTheme.primaryTextColorDark;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        foregroundColor: textColor, backgroundColor: colorScheme.primary, // Text color
+        foregroundColor: Colors.white, backgroundColor: colorScheme.primary, // Text color
         padding: padding, // Padding
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius), // Border radius

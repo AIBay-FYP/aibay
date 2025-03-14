@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart';
@@ -8,30 +9,40 @@ import 'package:aibay/constants.dart';
 
 class GoogleAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(clientId: dotenv.env["FIREBASE_CLIENT_ID"]);
+  static const List<String> scopes = [
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ];
+
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    clientId: dotenv.env["FIREBASE_CLIENT_ID"],
+    scopes: scopes,
+  );
+  
   final hello = dotenv.env["FIREBASE_CLIENT_ID"];
   final Dio _dio = Dio();
 
-  /// 🔹 Google Sign-In
+
   Future<User?> signInWithGoogle() async {
   log(hello.toString());
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signInSilently();
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? account = _googleSignIn.currentUser;
+
       if (googleUser == null) {
         log("⚠ User canceled Google Sign-In");
         return null;
       }
-
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
-        // idToken: googleAuth.idToken,
+        idToken: googleAuth.idToken,
       );
 
       final UserCredential userCredential = await _auth.signInWithCredential(credential);
 
-      // 🔹 Send the Firebase ID token to API
-      // await sendTokenToApi(userCredential.user);
+      await sendTokenToApi(userCredential.user);
 
       return userCredential.user;
     } catch (e) {
@@ -40,7 +51,6 @@ class GoogleAuthService {
     }
   }
 
-  /// 🔹 Sign Out
   Future<void> signOut() async {
     try {
       await _auth.signOut();
@@ -51,21 +61,27 @@ class GoogleAuthService {
     }
   }
 
-  /// 🔹 Send Firebase Token to API
   Future<void> sendTokenToApi(User? user) async {
     if (user == null) {
       print("⚠ No user found");
       return;
     }
-
     try {
       String? idToken = await user.getIdToken();
+      log(idToken!);
       if (idToken == null) {
         print("⚠ No ID token found");
         return;
       }
+      final base = dotenv.env['BASE_URL']!;
+      final dio = Dio(BaseOptions(
+        baseUrl: base,  // Replace with your server's address
+        connectTimeout: Duration(milliseconds: 100000),  // 10 seconds (increase if needed)
+        receiveTimeout: Duration(milliseconds: 100000),  // 10 seconds (increase if needed)
+      ));
 
-      String url = ApiConstants.verifyUser; // Replace with your actual API endpoint
+      String url = ApiConstants.verifyUser; 
+      log(url);
 
       final response = await _dio.post(
         url,

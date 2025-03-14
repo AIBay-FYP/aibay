@@ -4,6 +4,6 @@ class ApiConstants {
   static String baseUrl = dotenv.env['BASE_URL']!;
 
 
-  static final String verifyUser = '$baseUrl/api/signInVerification';
+  static final String verifyUser = '$baseUrl/api/verifyUser';
   
 }
