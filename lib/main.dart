@@ -1,3 +1,4 @@
+import 'package:aibay/screens/contract_details.dart';
 import 'package:aibay/screens/otp.dart';
 import 'package:aibay/screens/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,7 +36,7 @@ class MyApp extends ConsumerWidget {
 
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: LoginScreen(),
+      home: ContractDetailsScreen(),
     );
 
     // return MaterialApp(

@@ -46,6 +46,8 @@ dependencies:
   flutter_otp_text_field: 
   google_sign_in: 
   google_sign_in_web:
+  intl: 
+  carousel_slider:
 
 dev_dependencies:
   flutter_test:
